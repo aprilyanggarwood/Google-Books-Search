@@ -15,7 +15,10 @@ module.exports = {
   save: function (req, res) {
     db.GoogleBooks.create(req.body)
       .then((dbModel) => res.json(dbModel))
-      .catch((err) => res.status(422).json(err));
+      .catch((err) => {
+        console.log(err);
+        res.status(422).json(err);
+      });
   },
   remove: function (req, res) {
     db.GoogleBooks.findById({ _id: req.params.id })

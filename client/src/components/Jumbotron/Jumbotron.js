@@ -1,3 +1,4 @@
+import React from "react";
 import "./style.css";
 
 function Jumbotron() {
@@ -16,7 +17,7 @@ function Jumbotron() {
 
 export default Jumbotron;
 
-import React from "react";
+// import React from "react";
 
 // function Jumbotron({ children }) {
 //   return (

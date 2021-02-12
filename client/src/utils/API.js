@@ -1,13 +1,13 @@
 import axios from "axios";
 
-export default {
+const API = {
   // Retrieves Google books
   googleBooks: function (query) {
     return axios.get(`https://www.googleapis.com/books/v1/volumes?q=${query}`);
   },
   // Saves book to the DB
-  saveBook: function (bookData) {
-    return axios.post("/api/books", bookData);
+  saveBook: function (data) {
+    return axios.post("/api/books", data);
   },
   // Gets saved books from DB
   getBooks: function () {
@@ -22,3 +22,5 @@ export default {
     return axios.delete("/api/books/" + id);
   },
 };
+
+export default API;

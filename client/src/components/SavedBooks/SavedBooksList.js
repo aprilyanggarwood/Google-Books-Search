@@ -1,6 +1,5 @@
 import React from "react";
-import SavedBooksCard from "../SavedBooksCard";
-
+import SavedBooksCard from "../SavedBooksCard/SavedBooksCard";
 
 function SavedBooksList({ books }) {
   return books.map((book) => (
@@ -8,10 +7,9 @@ function SavedBooksList({ books }) {
       key={book.id}
       title={book.volumeInfo.title}
       authors={book.book.volumeInfo.authors}
-      image={book.volumeInfo.imageLinks    book.volumeInfo.imageLinks.thumbnail :}
+      image={book.volumeInfo.imageLinks?.thumbnail}
       description={book.volumeInfo.description}
       link={book.volumeInfo.previewLink}
-      deletBook={}
     />
   ));
 }

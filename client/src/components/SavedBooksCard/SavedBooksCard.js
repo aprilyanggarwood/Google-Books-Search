@@ -1,7 +1,7 @@
 import React from "react";
 
-function BooksCard(props) {
-  const { image, title, description, authors, link, deleteBook } = props;
+function SavedBooksCard(props) {
+  const { image, title, description, authors, link } = props;
 
   return (
     <div>
@@ -11,7 +11,7 @@ function BooksCard(props) {
           <img className="image" src={image} alt="book" />
           <h5 className="card-title">{title}</h5>
           <p className="card-text">{description}</p>
-          <p>Author(s): {authors}</p>
+          <p>Author(s): {authors.join(", ")}</p>
           <a
             href={link}
             target="_blank"
@@ -20,12 +20,12 @@ function BooksCard(props) {
           >
             View Book
           </a>
-          <button
+          {/* <button
             className="btn btn-danger delete-btn"
-            onClick={() => deleteBook(book)}
+            onClick={() => deleteBook(props.id)}
           >
             Delete
-          </button>
+          </button> */}
         </div>
       </div>
     </div>

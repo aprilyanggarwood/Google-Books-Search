@@ -1,18 +1,29 @@
 import React from "react";
+
+import { Button, Form } from "reactstrap";
+
 import "./style.css";
 
-export function Input(props) {
+function SearchForm(props) {
   return (
     <div className="form-group">
-      <input className="form-control" {...props} />
+      <Form>
+        <input
+          value={props.search}
+          onChange={props.handleInputChange}
+          name="search"
+          placeholder="e.g.English book"
+        />
+        <Button
+          type="button"
+          className="btn btn-primary"
+          onClick={props.handleFormSubmit}
+        >
+          Search
+        </Button>
+      </Form>
     </div>
   );
 }
 
-export function SubmitBtn(props) {
-  return (
-    <button {...props} className="btn submitBtn btn-primary">
-      Search
-    </button>
-  );
-}
+export default SearchForm;

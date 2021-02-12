@@ -2,7 +2,7 @@ import React from "react";
 import "./style.css";
 import { Link } from "react-router-dom";
 
-function Nav() {
+function Navbar() {
   return (
     <div>
       <nav className="navbar navbar-expand-lg navbar-dark">
@@ -39,4 +39,4 @@ function Nav() {
   );
 }
 
-export default Nav;
+export default Navbar;

@@ -1,69 +1,69 @@
-import React, { Component } from "react";
+import React, { useState } from "react";
 import { Container } from "../components/Grid/Grid";
+import { Form } from "reactstrap";
 import Nav from "../components/Nav/Navbar";
 import Jumbotron from "../components/Jumbotron/Jumbotron";
-// import { Input, SubmitBtn } from "../components/Search/Search";
+import SearchForm from "../components/SearchForm/SearchForm";
+import BooksCard from "../components/BooksCard/BooksCard";
+import BooksCardList from "../components/BooksCardList/BooksCardList";
+
 import API from "../utils/API";
-import ResultList from "../components/BooksCard/BooksCard";
 
 function HomePage() {
-  state = {
-    books: [],
-    search: "",
+  const [search, setSearch] = useState("");
+  const [books, setBooks] = useState([]);
+
+  const handleInputChange = ({ target: { value } }) => {
+    setSearch(value);
   };
 
-  const [books, setBooks] = useState({ API });
-
-  searchBooks = () => {};
-
-  saveBook = (currentBook) => {
-    console.log("This is the current book", currentBook);
+  const handleFormSubmit = (event) => {
+    // When the form is submitted, prevent its default behavior, get books update the books state
+    event.preventDefault();
+    API.googleBooks(search)
+      .then((res) => {
+        if (res.status === 200) {
+          console.log(res.data);
+          setBooks(res.data.items);
+        } else {
+          console.log(res.status);
+        }
+      })
+      .catch((err) => console.log(err));
+  };
+  const saveBook = (currentBook) => {
     API.saveBook({
       id: currentBook.id,
       title: currentBook.title,
       authors: currentBook.authors,
       description: currentBook.description,
-      image: currentBook.image,
-      link: currentBook.link,
+      image: currentBook.imageLinks,
+      link: currentBook.previewLink,
     })
       .then((res) => console.log("Successful POST to DB!", res))
       .catch((err) => console.log("this is the error", err));
   };
-
-  //   handleInputChange = (event) => {
-  //     const { name, value } = event.target;
-  //     this.setState({
-  //       [name]: value,
-  //     });
-  //   };
-
-  //   handleFormSubmit = (event) => {
-  //     event.preventDefault();
-  //     this.searchBooks();
-  //   };
 
   return (
     <div>
       <Nav />
       <Container fluid>
         <Jumbotron />
-        <form>
-          <h5>Search for books</h5>
-          <Input
-            value={search}
-            onChange={handleInputChange}
-            name="search"
-            placeholder=""
-          />
-          <SubmitBtn onClick={handleFormSubmit} />
-        </form>
+        <h5>Search for books</h5>
+        <SearchForm
+          search={search}
+          handleInputChange={handleInputChange}
+          handleFormSubmit={handleFormSubmit}
+        ></SearchForm>
 
-        <BooksCard></BooksCard>
-
-        <div>
-          <hr />
-          <p>No results to display</p>
-        </div>
+        {books.length ? (
+          <BooksCardList books={books} />
+        ) : (
+          <div>
+            <hr />
+            <p className="no-data">No Books Found</p>
+          </div>
+        )}
       </Container>
     </div>
   );
