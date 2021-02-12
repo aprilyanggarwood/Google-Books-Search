@@ -5,14 +5,15 @@ import { Container } from "reactstrap";
 
 import Home from "../src/pages/Home";
 import Saved from "../src/pages/Saved";
-import Nav from "../src/components/Nav/Navbar";
+import Navbar from "../src/components/Nav/Navbar";
 
 import "./App.css";
 const App = () => {
   return (
     <Router>
+    <Navbar />
       <div className="application">
-        <Nav />
+        
         <main className="main">
           <Container>
             <div className="wrapper">

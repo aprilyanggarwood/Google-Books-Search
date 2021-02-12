@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Container } from "../components/Grid/Grid";
 import { Form } from "reactstrap";
-import Nav from "../components/Nav/Navbar";
+// import Nav from "../components/Nav/Navbar";
 import Jumbotron from "../components/Jumbotron/Jumbotron";
 import SearchForm from "../components/SearchForm/SearchForm";
 import BooksCard from "../components/BooksCard/BooksCard";
@@ -46,7 +46,6 @@ function HomePage() {
 
   return (
     <div>
-      <Nav />
       <Container fluid>
         <Jumbotron />
         <h5>Search for books</h5>

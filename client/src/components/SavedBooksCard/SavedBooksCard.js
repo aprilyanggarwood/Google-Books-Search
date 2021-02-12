@@ -1,7 +1,8 @@
 import React from "react";
+import { Button } from "reactstrap";
 
 function SavedBooksCard(props) {
-  const { image, title, description, authors, link } = props;
+  const { image, title, description, authors, link, deleteBook } = props;
 
   return (
     <div>
@@ -20,12 +21,7 @@ function SavedBooksCard(props) {
           >
             View Book
           </a>
-          {/* <button
-            className="btn btn-danger delete-btn"
-            onClick={() => deleteBook(props.id)}
-          >
-            Delete
-          </button> */}
+          <Button onClick={deleteBook}>Delete Book</Button>
         </div>
       </div>
     </div>
