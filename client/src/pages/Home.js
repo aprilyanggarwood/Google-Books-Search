@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Container } from "../components/Grid/Grid";
-import { Form } from "reactstrap";
+// import { Form } from "reactstrap";
 // import Nav from "../components/Nav/Navbar";
 import Jumbotron from "../components/Jumbotron/Jumbotron";
 import SearchForm from "../components/SearchForm/SearchForm";
@@ -30,18 +30,6 @@ function HomePage() {
         }
       })
       .catch((err) => console.log(err));
-  };
-  const saveBook = (currentBook) => {
-    API.saveBook({
-      id: currentBook.id,
-      title: currentBook.title,
-      authors: currentBook.authors,
-      description: currentBook.description,
-      image: currentBook.imageLinks,
-      link: currentBook.previewLink,
-    })
-      .then((res) => console.log("Successful POST to DB!", res))
-      .catch((err) => console.log("this is the error", err));
   };
 
   return (

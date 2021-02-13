@@ -4,31 +4,45 @@ import API from "../../utils/API";
 
 function SavedBooksList({ books }) {
   console.log(books);
-  const deleteBook = (book) => {
+  const deleteBook = (currentBook, data) => {
     const bookObj = {
-      title: book.volumeInfo.title,
-      authors: book.volumeInfo.authors || [],
-      description: book.volumeInfo.description,
-      image: book.volumeInfo.imageLinks?.thumbnail || "",
-      link: book.volumeInfo.previewLink,
+      title: currentBook.volumeInfo.title,
+      authors: currentBook.volumeInfo.authors || [],
+      description: currentBook.volumeInfo.description,
+      image: currentBook.volumeInfo.imageLinks?.thumbnail || "",
+      link: currentBook.volumeInfo.previewLink,
     };
-    API.deleteBook(bookObj).then((data) => {
-      console.log("saved!");
-    });
+    API.deleteBook(bookObj)
+      .include(data._id)
+      .then((data) => {
+        //   getBooks();
+        console.log("deleted!");
+      });
   };
 
   return books.map((book) => (
-    
     <SavedBooksCard
-      key={book.id}
       title={book.volumeInfo.title}
       authors={book.volumeInfo.authors}
       image={book.volumeInfo.imageLinks?.thumbnail}
       description={book.volumeInfo.description}
       link={book.volumeInfo.previewLink}
-      deleteBook={() => deleteBook(book)}
+      deleteBook={() => deleteBook()}
     />
   ));
 }
 
 export default SavedBooksList;
+
+// const saveBook = (currentBook) => {
+//   API.saveBook({
+//     id: currentBook.id,
+//     title: currentBook.title,
+//     authors: currentBook.authors,
+//     description: currentBook.description,
+//     image: currentBook.imageLinks,
+//     link: currentBook.previewLink,
+//   })
+//     .then((res) => console.log("Successful POST to DB!", res))
+//     .catch((err) => console.log("this is the error", err));
+// };
