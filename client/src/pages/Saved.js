@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import API from "../utils/API";
 // import { useParams } from "react-router-dom";
 
@@ -9,18 +9,19 @@ import SavedBooksList from "../components/SavedBooks/SavedBooksList";
 function SavedPage() {
   const [savedBook, setSavedBook] = useState([]);
   //   const { id } = useParams();
-  const savedbooks = (savedbook) => {
-    API.getBooks()
-      .then((res) => {
-        setSavedBook({
-          savedBook: res.data,
-        });
-        console.log("This is the res from getBooks", res);
-      })
-      .catch((err) => {
-        console.log("This is the error", err);
-      });
-  };
+  // const savedbooks = () => {
+  //   API.getBooks()
+  //     .then((res) => {
+  //       // console.log(savedBook);
+  //       setSavedBook({
+  //         savedBook: res.data,
+  //       });
+  //       console.log("This is the res from getBooks", res);
+  //     })
+  //     .catch((err) => {
+  //       console.log("This is the error", err);
+  //     });
+  // };
 
   //   const deleteBook = (currentBook, data) => {
   //     const bookObj = {
@@ -37,23 +38,38 @@ function SavedPage() {
   //         console.log("deleted!");
   //       });
   //   };
+  useEffect(() => {
+    API.getBooks()
+      .then((res) => {
+        // console.log(savedBook);
+        setSavedBook(res.data);
+        // setSavedBook({
+
+        //   savedBook: res.data,
+        // });
+        console.log("savedBook");
+        // console.log("This is the res from getBooks", res);
+      })
+      .catch((err) => {
+        console.log("This is the error", err);
+      });
+  }, []);
 
   return (
     <div>
-      <Container fluid>
+      {/* <Container fluid>
         <Jumbotron />
         {savedBook.length ? (
-          <SavedBooksList>
-            savedBook={savedbooks}
-            {/* deleteBook={deleteBook} */}
-          </SavedBooksList>
+          // <SavedBooksList>savedBook={savedbooks}</SavedBooksList>
+          <SavedBooksList books={savedBook} />
         ) : (
           <div>
             <hr />
             <p className="no-data">No Saved Books Yet!</p>
           </div>
-        )}
-      </Container>
+        )} */}
+      <SavedBooksList books={savedBook} />
+      {/* </Container> */}
     </div>
   );
 }
