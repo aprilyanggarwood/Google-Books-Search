@@ -11,9 +11,8 @@ import "./App.css";
 const App = () => {
   return (
     <Router>
-    <Navbar />
+      <Navbar />
       <div className="application">
-        
         <main className="main">
           <Container>
             <div className="wrapper">

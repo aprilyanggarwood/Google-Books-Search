@@ -10,6 +10,8 @@ function BooksCardList({ books }) {
       description: book.volumeInfo.description,
       image: book.volumeInfo.imageLinks?.thumbnail || "",
       link: book.volumeInfo.previewLink,
+      subtitle: book.volumeInfo.subtitle,
+      googleId: book.id,
     };
     API.saveBook(bookObj).then((data) => {
       console.log("saved!");

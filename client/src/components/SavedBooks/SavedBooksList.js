@@ -2,47 +2,41 @@ import React from "react";
 import SavedBooksCard from "../SavedBooksCard/SavedBooksCard";
 import API from "../../utils/API";
 
-function SavedBooksList({ books }) {
+function SavedBooksList({ books, setSavedBook }) {
   console.log(books);
-  const deleteBook = (currentBook, data) => {
-    const bookObj = {
-      title: currentBook.volumeInfo.title,
-      authors: currentBook.volumeInfo.authors || [],
-      description: currentBook.volumeInfo.description,
-      image: currentBook.volumeInfo.imageLinks?.thumbnail || "",
-      link: currentBook.volumeInfo.previewLink,
-    };
-    API.deleteBook(bookObj)
-      .include(data._id)
-      .then((data) => {
-        //   getBooks();
-        console.log("deleted!");
-      });
+  const deleteBook = (currentBookID) => {
+    // const bookObj = {
+    //   title: currentBook.volumeInfo.title,
+    //   authors: currentBook.volumeInfo.authors || [],
+    //   description: currentBook.volumeInfo.description,
+    //   image: currentBook.volumeInfo.imageLinks?.thumbnail || "",
+    //   link: currentBook.volumeInfo.previewLink,
+    // };
+
+    API.deleteBook(currentBookID).then((data) => {
+      console.log("deleted!");
+      API.getBooks()
+        .then((res) => {
+          setSavedBook(res.data);
+          console.log("savedBook");
+          // console.log("This is the res from getBooks", res);
+        })
+        .catch((err) => {
+          console.log("This is the error", err);
+        });
+    });
   };
 
   return books.map((book) => (
     <SavedBooksCard
-      title={book.volumeInfo.title}
-      authors={book.volumeInfo.authors}
-      image={book.volumeInfo.imageLinks?.thumbnail}
-      description={book.volumeInfo.description}
-      link={book.volumeInfo.previewLink}
-      deleteBook={() => deleteBook()}
+      title={book.title}
+      authors={book.authors}
+      image={book.image}
+      description={book.description}
+      link={book.link}
+      deleteBook={() => deleteBook(book._id)}
     />
   ));
 }
 
 export default SavedBooksList;
-
-// const saveBook = (currentBook) => {
-//   API.saveBook({
-//     id: currentBook.id,
-//     title: currentBook.title,
-//     authors: currentBook.authors,
-//     description: currentBook.description,
-//     image: currentBook.imageLinks,
-//     link: currentBook.previewLink,
-//   })
-//     .then((res) => console.log("Successful POST to DB!", res))
-//     .catch((err) => console.log("this is the error", err));
-// };

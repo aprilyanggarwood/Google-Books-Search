@@ -3,7 +3,7 @@ import { Button } from "reactstrap";
 
 function SavedBooksCard(props) {
   const { image, title, description, authors, link, deleteBook } = props;
-
+  console.log(image);
   return (
     <div>
       <div className="card">
