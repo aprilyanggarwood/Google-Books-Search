@@ -6,12 +6,9 @@ This Google Books Search application was used MERN stack to build the front-end 
 
 ## Table of Contents
 
-- [Useage](#Useage)
 - [Usage](#Usage)
-- [NPM-Packages--Dependencies-Used](#NPM-Packages--Dependencies-Used)
-- [Directory-Structure](#Directory-Structure)
-- [Screenshots](#screenshots)
-- [Demo](#demo)
+- [Technologies Used](#Technologies-Used)
+- [Demo](#Demo)
 - [Deploy](#Deploy) - [Heroku](https://search-google-books-app.herokuapp.com/)
 - [License](#license)
 - [Questions](#questions)
@@ -29,14 +26,9 @@ This application allows user to search google books using Google Books API. User
     - Node.js
     - NPM packages: React-router, Express, Axios
 
-## Screenshots
-
-![screenshots](./client/src/components/screenshots/screenshot1.png)
-![screenshots](./client/src/components/screenshots/screenshot2.png)
-
 ## Demo
 
-![DemoLink]()
+![Demo](./client/src/components/screenshots/googlebooksearch.gif)
 
 ## Deploy
 
